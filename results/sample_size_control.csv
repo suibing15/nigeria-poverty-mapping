@@ -1,0 +1,16 @@
+group,country,n_full,n_subsample,R2_full_sample,R2_subsample_mean,R2_subsample_sd,repeats
+all,nigeria,1380,399,0.8019,0.7776,0.0143,10
+all,ethiopia,796,399,0.768,0.7619,0.0209,10
+all,malawi,769,399,0.686,0.6677,0.0248,10
+all,rwanda,560,399,0.582,0.5742,0.0235,10
+all,senegal,399,399,0.8259,0.8236,0.0052,10
+rural,nigeria,683,213,0.7027,0.6122,0.0495,10
+rural,ethiopia,516,213,0.6178,0.5675,0.0438,10
+rural,malawi,600,213,0.2668,0.0978,0.0913,10
+rural,rwanda,362,213,0.0153,0.0264,0.0409,10
+rural,senegal,213,213,0.6979,0.679,0.0135,10
+urban,nigeria,697,169,0.6431,0.5411,0.0388,10
+urban,ethiopia,280,169,0.6039,0.5569,0.0599,10
+urban,malawi,169,169,0.0745,0.1115,0.066,10
+urban,rwanda,198,169,0.325,0.3215,0.0312,10
+urban,senegal,186,169,0.595,0.5779,0.0209,10

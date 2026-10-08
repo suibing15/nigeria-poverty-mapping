@@ -9,7 +9,7 @@ every methodological choice explicit so results do not depend on how a CSV is so
 
 WHAT IT DOES (every country, same settings)
   1. Random 5-fold CV, always shuffle=True, random_state=42.
-  2. Spatial CV: whole regions/states held out (GroupKFold).
+  2. Spatial CV: whole regions/states held out (StableGroupKFold in spatial_folds.py: identical folds on every computer).
   3. Held-out test split (for plots).
   4. Feature importance from a model refit on the FULL sample   <-- v2 change (v1 used the 80% split)
   5. Rural / urban stratified models, same settings.
@@ -41,7 +41,8 @@ import matplotlib.pyplot as plt
 from scipy.stats import spearmanr
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score, mean_squared_error
-from sklearn.model_selection import train_test_split, cross_val_score, KFold, GroupKFold
+from sklearn.model_selection import train_test_split, cross_val_score, KFold
+from spatial_folds import StableGroupKFold   # fixed fold rule: same folds on every computer
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -128,7 +129,7 @@ if 5 <= n_groups < 10:
     print(f"\nNOTE: only {n_groups} regions - spatial CV holds out roughly one region per fold, "
           f"so it is very coarse. Interpret it with care.")
 if n_groups >= 5:
-    spatial_scores = cross_val_score(rf(), X, y, cv=GroupKFold(n_splits=5), groups=groups, scoring='r2')
+    spatial_scores = cross_val_score(rf(), X, y, cv=StableGroupKFold(5), groups=groups, scoring='r2')
     print(f"\n=== Spatial ({REGION_COL}-grouped) 5-fold CV ===")
     print(f"R2 per fold : {np.round(spatial_scores, 4)}   Mean: {spatial_scores.mean():.4f}")
     results["spatial_cv_r2_mean"] = f(spatial_scores.mean())

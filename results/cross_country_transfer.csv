@@ -1,0 +1,6 @@
+held_out_country,n_test,n_train,trained_on,loco_R2_all,loco_spearman_all,loco_r2_recal_all,loco_R2_rural,loco_spearman_rural,loco_r2_recal_rural,loco_R2_urban,loco_spearman_urban,loco_r2_recal_urban,mean_pred_z,sd_pred_z,within_country_cv_R2
+nigeria,1380,2524,ethiopia+malawi+rwanda+senegal,0.4374,0.808,0.6252,0.1863,0.7268,0.5042,-0.1092,0.5445,0.3167,0.415,0.916,0.8019
+ethiopia,796,3108,nigeria+malawi+rwanda+senegal,0.6885,0.7402,0.7113,0.2006,0.5345,0.2821,0.0896,0.777,0.5739,-0.146,0.88,0.7681
+malawi,769,3135,nigeria+ethiopia+rwanda+senegal,0.4806,0.5904,0.5999,-0.0593,0.2098,0.1322,-1.3508,0.3483,0.1101,-0.303,0.609,0.686
+rwanda,560,3344,nigeria+ethiopia+malawi+senegal,0.2663,0.6408,0.5201,-3.6728,0.2892,0.1069,0.3077,0.6097,0.3166,0.499,0.652,0.5821
+senegal,399,3505,nigeria+ethiopia+malawi+rwanda,0.5678,0.7788,0.6287,0.4291,0.4939,0.4462,-0.4375,0.3461,0.202,-0.216,0.673,0.8259

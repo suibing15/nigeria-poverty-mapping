@@ -47,7 +47,9 @@ def discover():
     if os.path.isfile(features_path("nigeria")):
         found.add("nigeria")
     for f in glob.glob(os.path.join("outputs", PREFIX + "*.csv")):
-        found.add(os.path.basename(f)[len(PREFIX):-4])
+        name = os.path.basename(f)[len(PREFIX):-4]
+        if not name.endswith("_raw"):          # *_raw.csv = untouched backup made by fill_missing_precipitation.py
+            found.add(name)
     return [c for c in PREFERRED if c in found] + sorted(found - set(PREFERRED))
 
 

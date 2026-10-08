@@ -25,7 +25,8 @@ import warnings
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import GroupKFold, KFold, cross_val_score
+from sklearn.model_selection import KFold, cross_val_score
+from spatial_folds import StableGroupKFold
 
 warnings.filterwarnings("ignore")
 FEATS = ["B2", "B3", "B4", "B8", "B11", "B12", "NDVI", "avg_rad", "precipitation", "Map", "elevation", "slope", "population"]
@@ -37,7 +38,7 @@ def evaluate(d, feats):
     kf = KFold(5, shuffle=True, random_state=42)
     out = {"n": len(d)}
     out["random_cv_r2"] = cross_val_score(RandomForestRegressor(**RF), X, y, cv=kf, scoring="r2").mean()
-    out["spatial_cv_r2"] = cross_val_score(RandomForestRegressor(**RF), X, y, cv=GroupKFold(5),
+    out["spatial_cv_r2"] = cross_val_score(RandomForestRegressor(**RF), X, y, cv=StableGroupKFold(5),
                                            groups=d["state"].values, scoring="r2").mean()
     for tag, code in (("rural", "R"), ("urban", "U")):
         s = d[d["urban_rural"] == code]

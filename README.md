@@ -14,13 +14,13 @@ built from free satellite and agro-environmental data, in 5 countries and 3,904 
 
 | Country | Clusters | Random CV R² | Spatial CV R² | Rural-only R² | Urban-only R² | Rural R², location-only baseline | Top feature |
 |---|---|---|---|---|---|---|---|
-| Nigeria (DHS 2024) | 1,380 | 0.80 | 0.74 | 0.70 | 0.64 | 0.47 | nightlights (66%) |
+| Nigeria (DHS 2024) | 1,380 | 0.80 | 0.76 | 0.70 | 0.64 | 0.47 | nightlights (66%) |
 | Ethiopia (DHS 2024-25) | 796 | 0.77 | 0.63 | 0.62 | 0.60 | 0.54 | population density (49%) |
-| Malawi (DHS 2024) | 769 | 0.69 | 0.54 | 0.27 | 0.07 | 0.23 | population density (65%) |
+| Malawi (DHS 2024) | 769 | 0.69 | 0.58 | 0.27 | 0.07 | 0.23 | population density (65%) |
 | Rwanda (DHS 2025) | 560 | 0.58 | 0.36 | 0.02 | 0.33 | 0.12 | nightlights (68%) |
-| Senegal (Continuous DHS 2023) | 399 | 0.83 | 0.78 | 0.70 | 0.59 | 0.55 | nightlights (87%) |
+| Senegal (Continuous DHS 2023) | 399 | 0.83 | 0.77 | 0.70 | 0.59 | 0.55 | nightlights (87%) |
 
-*CV = cross-validation. "Spatial" holds out whole states or regions. "Location-only" is the same model given only latitude and longitude.
+*CV = cross-validation. "Spatial" holds out whole states or regions with a fixed fold rule (`spatial_folds.py`), so results do not depend on the software version. "Location-only" is the same model given only latitude and longitude.
 Wealth-index levels are country-specific and not comparable across countries; R² is.*
 
 **What the comparison shows**
@@ -65,6 +65,7 @@ merge_dhs_country.py              builds the cluster wealth + GPS table; auto-fi
 extract_features_dhs_country.py   Earth Engine feature extraction; retries and resumes safely
 fill_missing_precipitation.py     fills a few empty coastal rainfall values from the nearest cluster
 train_model.py                    the canonical training and validation script (v3)
+spatial_folds.py                  fixed spatial-fold rule: identical folds on every computer
 cross_country_transfer.py         leave-one-country-out transfer test
 sample_size_control.py            equal-sample-size control
 missing_rainfall_sensitivity.py   effect of how missing rainfall is handled

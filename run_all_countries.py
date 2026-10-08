@@ -55,7 +55,9 @@ def discover():
     if os.path.isfile(NIGERIA_FEATURES):
         found.add("nigeria")
     for f in glob.glob(os.path.join("outputs", PREFIX + "*.csv")):
-        found.add(os.path.basename(f)[len(PREFIX):-4])
+        name = os.path.basename(f)[len(PREFIX):-4]
+        if not name.endswith("_raw"):          # *_raw.csv = untouched backup made by fill_missing_precipitation.py
+            found.add(name)
     for f in glob.glob(os.path.join("data", "*", "dhs_cluster_wealth_gps.csv")):
         found.add(os.path.basename(os.path.dirname(f)))
     if os.path.isfile(os.path.join("data", "dhs", "dhs_cluster_wealth_gps.csv")):
@@ -103,7 +105,7 @@ def print_status(countries):
 def run_training(c):
     os.makedirs(os.path.join("outputs", "logs"), exist_ok=True)
     log = os.path.join("outputs", "logs", f"train_{c}.log")
-    env = dict(os.environ, PYTHONIOENCODING="utf-8")
+    env = dict(os.environ, PYTHONIOENCODING="utf-8", MPLBACKEND="Agg")
     t0 = time.time()
     r = subprocess.run([sys.executable, "train_model.py", c], capture_output=True, text=True,
                        encoding="utf-8", errors="replace", env=env)
