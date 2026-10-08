@@ -43,9 +43,9 @@ def problem(path):
     reasons = []
     if os.path.splitext(p)[1].lower() in BAD_EXT:
         reasons.append("data or archive format")
-    if p.startswith(BAD_DIRS):
-        reasons.append("inside data/ or outputs/")
     base, ext = os.path.basename(p), os.path.splitext(p)[1].lower()
+    if p.startswith(BAD_DIRS) and ext not in CODE_EXT:      # code and notes inside data/ are fine; data files are not
+        reasons.append("inside data/ or outputs/")
     if ext not in CODE_EXT and TABLE_NAME.search(base):
         reasons.append("cluster table by name")
     if SECRET_NAME.search(base):
